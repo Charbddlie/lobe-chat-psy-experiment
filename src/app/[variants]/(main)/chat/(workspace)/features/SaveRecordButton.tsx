@@ -7,12 +7,13 @@ import { useTranslation } from 'react-i18next';
 
 import { DESKTOP_HEADER_ICON_SIZE, MOBILE_HEADER_ICON_SIZE } from '@/const/layoutTokens';
 import { chatSelectors } from '@/store/chat/selectors';
-// import { useFetchMessages } from '@/hooks/useFetchMessages'
 import { getChatStoreState } from '@/store/chat/store';
-
-// import { aL } from 'vitest/dist/chunks/reporters.d.DG9VKi4m.js';
+import { getSessionStoreState, useSessionStore } from '@/store/session';
+import { sessionSelectors } from '@/store/session/selectors';
+import { sessionGroupSelectors } from '@/store/session/slices/sessionGroup/selectors';
 
 const SaveRecordButton = memo<{ mobile?: boolean }>(({ mobile }) => {
+  const store = useSessionStore();
   const { t } = useTranslation('common');
 
   return (
@@ -20,29 +21,18 @@ const SaveRecordButton = memo<{ mobile?: boolean }>(({ mobile }) => {
       <ActionIcon
         icon={FolderDown}
         onClick={() => {
-          const chatStoreState = getChatStoreState();
-          // let record = null;
-          // Call all selectors from chatSelectors and print their results
-          const records = chatSelectors.activeBaseChatsWithoutTool(chatStoreState);
-          console.log('activeBaseChatsWithoutTool:', records);
-
-          // Convert filtered records to JSON string
-          const jsonData = JSON.stringify(records, null, 2);
-
-          // Extract the title from the first assistant message's meta if available
-          let title = '';
-          try {
-            const parsedRecords = JSON.parse(jsonData);
-            const assistantMessage = parsedRecords.find(
-              (message: { role: string }) => message.role === 'assistant',
-            );
-            if (assistantMessage && assistantMessage.meta && assistantMessage.meta.title) {
-              title = assistantMessage.meta.title;
-              console.log('Extracted title from assistant message:', title);
-            }
-          } catch (error) {
-            console.error('Error parsing or extracting title from records:', error);
+          // 当前聊天所在的group名
+          const state = getSessionStoreState();
+          const session_state = sessionSelectors.currentSession(state);
+          let group = 'default';
+          if (session_state && session_state.group) {
+            group =
+              sessionGroupSelectors.getGroupById(session_state.group)(store)?.name || 'default';
           }
+
+          // 消息记录
+          const chatStoreState = getChatStoreState();
+          const records = chatSelectors.activeBaseChatsWithoutTool(chatStoreState);
 
           // Filter the records to only include necessary fields
           let filteredRecords = records.map((record, index) => {
@@ -69,14 +59,13 @@ const SaveRecordButton = memo<{ mobile?: boolean }>(({ mobile }) => {
 
             // Replace the timestamp values with formatted date strings
             return {
-              
               content,
-              
-createdAt: formattedCreatedAt,
-              
-resp_time,
+
+              createdAt: formattedCreatedAt,
+
+              resp_time,
               // eslint-disable-next-line sort-keys-fix/sort-keys-fix
-role,
+              role,
               updatedAt: formattedUpdatedAt,
             };
           });
@@ -94,6 +83,7 @@ role,
           );
           const csvData = [headers, ...csvRows].join('\n');
 
+          // 下载
           // Create a blob from the CSV data
           const blob = new Blob([csvData], { type: 'text/csv' });
           // Create a URL for the blob
@@ -103,7 +93,7 @@ role,
           a.href = url;
           // Set the file name with current date and time
           const date = new Date();
-          const fileName = `${title}_${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getDate().toString().padStart(2, '0')}${date.getHours().toString().padStart(2, '0')}${date.getMinutes().toString().padStart(2, '0')}${date.getSeconds().toString().padStart(2, '0')}.csv`;
+          const fileName = `${group}_${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getDate().toString().padStart(2, '0')}_${date.getHours().toString().padStart(2, '0')}${date.getMinutes().toString().padStart(2, '0')}${date.getSeconds().toString().padStart(2, '0')}.csv`;
           a.download = fileName;
           // Append to body, click to download, and clean up
           document.body.append(a);
