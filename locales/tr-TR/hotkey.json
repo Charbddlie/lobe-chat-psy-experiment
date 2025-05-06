@@ -27,6 +27,10 @@
     "desc": "Son mesajı yeniden oluştur",
     "title": "Mesajı yeniden oluştur"
   },
+  "saveRecord": {
+    "desc": "None",
+    "title": "None"
+  },
   "saveTopic": {
     "desc": "Mevcut konuyu kaydedin ve yeni bir konu açın",
     "title": "Yeni konu aç"

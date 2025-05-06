@@ -27,6 +27,10 @@
     "desc": "Ponownie wygeneruj ostatnią wiadomość",
     "title": "Ponownie wygeneruj wiadomość"
   },
+  "saveRecord": {
+    "desc": "None",
+    "title": "None"
+  },
   "saveTopic": {
     "desc": "Zapisz bieżący temat i otwórz nowy temat",
     "title": "Rozpocznij nowy temat"

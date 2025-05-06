@@ -64,6 +64,7 @@ export const HotkeyEnum = {
   OpenHotkeyHelper: 'openHotkeyHelper',
   OpenSettings: 'openSettings',
   RegenerateMessage: 'regenerateMessage',
+  SaveRecord: 'saveRecord',
   SaveTopic: 'saveTopic',
   Search: 'search',
   SwitchAgent: 'switchAgent',

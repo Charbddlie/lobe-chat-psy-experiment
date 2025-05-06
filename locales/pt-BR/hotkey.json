@@ -27,6 +27,10 @@
     "desc": "Regenerar a última mensagem",
     "title": "Regenerar mensagem"
   },
+  "saveRecord": {
+    "desc": "None",
+    "title": "None"
+  },
   "saveTopic": {
     "desc": "Salvar o tópico atual e abrir um novo tópico",
     "title": "Iniciar novo tópico"

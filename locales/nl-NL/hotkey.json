@@ -27,6 +27,10 @@
     "desc": "Genereer het laatste bericht opnieuw",
     "title": "Genereer bericht opnieuw"
   },
+  "saveRecord": {
+    "desc": "None",
+    "title": "None"
+  },
   "saveTopic": {
     "desc": "Sla het huidige onderwerp op en open een nieuw onderwerp",
     "title": "Start nieuw onderwerp"

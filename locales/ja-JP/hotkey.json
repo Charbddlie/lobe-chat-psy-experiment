@@ -27,6 +27,10 @@
     "desc": "最後のメッセージを再生成します",
     "title": "メッセージを再生成"
   },
+  "saveRecord": {
+    "desc": "None",
+    "title": "None"
+  },
   "saveTopic": {
     "desc": "現在のトピックを保存し、新しいトピックを開きます",
     "title": "新しいトピックを開始"

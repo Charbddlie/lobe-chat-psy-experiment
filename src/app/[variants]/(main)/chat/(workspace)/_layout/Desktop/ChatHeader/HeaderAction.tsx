@@ -14,6 +14,7 @@ import { useUserStore } from '@/store/user';
 import { settingsSelectors } from '@/store/user/selectors';
 import { HotkeyEnum } from '@/types/hotkey';
 
+import SaveRecordButton from '../../../features/SaveRecordButton';
 import SettingButton from '../../../features/SettingButton';
 import ShareButton from '../../../features/ShareButton';
 
@@ -29,6 +30,7 @@ const HeaderAction = memo<{ className?: string }>(({ className }) => {
 
   return (
     <Flexbox className={className} gap={4} horizontal>
+      <SaveRecordButton />
       <ShareButton />
       <Tooltip hotkey={hotkey} title={t('toggleRightPanel.title', { ns: 'hotkey' })}>
         <ActionIcon

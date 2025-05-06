@@ -27,6 +27,10 @@
     "desc": "Tạo lại tin nhắn cuối cùng",
     "title": "Tạo lại tin nhắn"
   },
+  "saveRecord": {
+    "desc": "None",
+    "title": "None"
+  },
   "saveTopic": {
     "desc": "Lưu chủ đề hiện tại và mở chủ đề mới",
     "title": "Mở chủ đề mới"

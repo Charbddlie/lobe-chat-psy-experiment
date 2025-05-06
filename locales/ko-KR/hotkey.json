@@ -27,6 +27,10 @@
     "desc": "마지막 메시지를 다시 생성합니다",
     "title": "메시지 다시 생성"
   },
+  "saveRecord": {
+    "desc": "None",
+    "title": "None"
+  },
   "saveTopic": {
     "desc": "현재 주제를 저장하고 새 주제를 엽니다",
     "title": "새 주제 시작"
